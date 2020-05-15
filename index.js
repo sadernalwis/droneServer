@@ -9,13 +9,13 @@ app.get("/", function (req, res) {
 });
 
 io.on("connection", (socket) => {
-  console.log('connection is established')
-  socket.on('GPS_DATA',(data) => {
-    console.log('data',data);
-    socket.emit("DRONE_DATA", { data })
+  console.log("connection is established");
+  socket.on("GPS_DATA", (data) => {
+    console.log("data", data);
+    socket.emit("DRONE_DATA", { data });
   });
 });
 
 server.listen(HTTP_SERVER_PORT, () => {
-  console.log("Server started on Port 8080");
+  console.log(`Server started on Port ${HTTP_SERVER_PORT} `);
 });
