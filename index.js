@@ -9,6 +9,13 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+io.on("connection", (socket) => {
+  socket.on('GPS_DATA',(data) => {
+    console.log('data',data);
+    socket.emit("DRONE_DATA", { data })
+  });
+});
+
 server.listen(HTTP_SERVER_PORT, () => {
   console.log("Server started on Port 8080");
 });
