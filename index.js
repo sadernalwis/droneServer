@@ -9,7 +9,7 @@ app.get("/", function (req, res) {
 });
 
 io.on("connection", (socket) => {
-  console.log("connection is established");
+  console.log('IO Connection Established...................................', socket.id);
   socket.on("GPS_DATA", (data) => {
     console.log("data", data);
     socket.emit("DRONE_DATA", { data });
