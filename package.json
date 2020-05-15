@@ -1,13 +1,17 @@
 {
-  "name": "droneserver",
-  "version": "0.0.1",
-  "description": "Socket Io server for a drone",
+  "name": "websockets-socket.io",
+  "version": "1.0.0",
+  "engines": {
+    "node": "12.x"
+  },
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
-  "author": "lakshankarunathilake",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
