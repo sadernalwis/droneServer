@@ -1,21 +1,19 @@
-const app = require("express")();
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
+const PORT = process.env.PORT || 3000;
+const INDEX = "/index.html";
 
-const HTTP_SERVER_PORT = 8201;
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-});
+const io = socketIO(server);
 
 io.on("connection", (socket) => {
-  console.log('IO Connection Established...................................', socket.id);
+  console.log("Client connected");
+  socket.on("disconnect", () => console.log("Client disconnected"));
+
   socket.on("GPS_DATA", (data) => {
-    console.log("data", data);
-    socket.emit("DRONE_DATA", { data });
+    console.log("Data received", data);
   });
 });
 
-server.listen(HTTP_SERVER_PORT, () => {
-  console.log(`Server started on Port ${HTTP_SERVER_PORT} `);
-});
+setInterval(() => io.emit("time", new Date().toTimeString()), 1000);
