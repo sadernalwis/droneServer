@@ -1,11 +1,12 @@
 <html>
   <head>
-    <script src="/drone/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
       let el;
-
+      console.log(socket);
       socket.on("CLIENT", (data) => {
+        console.log("data", data);
         el = document.getElementById("socket-data");
         let node = document.createElement("LI"); // Create a <li> node
         let textnode = document.createTextNode(JSON.stringify(data)); // Create a text node

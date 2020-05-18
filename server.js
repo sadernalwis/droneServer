@@ -14,9 +14,7 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-const io = socketIO(server, {
-  path: "/drone/socket.io",
-});
+const io = socketIO(server);
 
 // Initializing firstore
 initializeApp();
@@ -31,3 +29,5 @@ io.on("connection", (socket) => {
     console.log("GPS DATA", data);
   });
 });
+
+setInterval(() => io.emit("CLIENT", new Date().toTimeString()), 1000);
