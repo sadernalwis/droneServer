@@ -1,6 +1,8 @@
 const express = require("express");
 const socketIO = require("socket.io");
 
+const { addLocationData, initializeApp } = require("./Firestore/db");
+
 const PORT = process.env.PORT || 3000;
 const INDEX = "/index.html";
 
@@ -9,6 +11,9 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
+
+// Initializing firstore
+initializeApp();
 
 io.on("connection", (socket) => {
   console.log("Client connected", PORT);
