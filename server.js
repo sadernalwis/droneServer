@@ -1,7 +1,11 @@
 const express = require("express");
 const socketIO = require("socket.io");
 
-const { addLocationData, initializeApp } = require("./Firestore/db");
+const {
+  addLocationData,
+  initializeApp,
+  connectionAttemptRecord,
+} = require("./Firestore/db");
 
 const PORT = process.env.PORT || 3000;
 const INDEX = "/index.html";
@@ -17,6 +21,7 @@ initializeApp();
 
 io.on("connection", (socket) => {
   console.log("Client connected", PORT);
+  connectionAttemptRecord(socket.id);
   socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("GPS_DATA", (data) => {
