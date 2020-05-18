@@ -21,7 +21,7 @@ initializeApp();
 
 io.on("connection", (socket) => {
   console.log("Client connected", PORT);
-  connectionAttemptRecord(socket.id);
+  // connectionAttemptRecord(socket.id);
   socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("GPS_DATA", (data) => {
