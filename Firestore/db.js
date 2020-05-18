@@ -17,4 +17,16 @@ const addLocationData = (data, timestamp) => {
   return db.collection(currentDate).add(data);
 };
 
-module.exports = { db, initializeApp, addLocationData };
+const connectionAttemptRecord = (socketID) => {
+  return db.collection("ConnectionAtempt").add({
+    date: new Date(),
+    id: socketID,
+  });
+};
+
+module.exports = {
+  db,
+  initializeApp,
+  addLocationData,
+  connectionAttemptRecord,
+};
