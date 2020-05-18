@@ -29,5 +29,3 @@ io.on("connection", (socket) => {
     console.log("GPS DATA", data);
   });
 });
-
-setInterval(() => io.emit("CLIENT", new Date().toTimeString()), 1000);
