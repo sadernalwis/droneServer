@@ -25,7 +25,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("GPS_DATA", (data) => {
-    io.emit('CLIENT', data.toTimeString());
+    io.emit('CLIENT', data);
     console.log("GPS DATA", data);
   });
 });
