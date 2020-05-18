@@ -2,7 +2,7 @@
   <head>
     <script src="/drone/socket.io/socket.io.js"></script>
     <script>
-      let socket = io("http://localhost:3000");
+      let socket = io();
       let el;
 
       socket.on("CLIENT", (data) => {
