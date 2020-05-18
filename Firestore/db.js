@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = require('../serviceAccountKey.json');
 //initialize admin SDK using serciceAcountKey
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -18,11 +18,6 @@ getDialogue().then(result =>{
             console.log('new Dialogue written to database'));
 });
 
-function getDialogue(){
-    return new Promise(function(resolve, reject) {
-        resolve({
-            "quote":"I'm Batman",
-            "author":"Batman"
-        });
-    })
+const addLocationDate = () => {
+    
 }
