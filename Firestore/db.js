@@ -1,23 +1,20 @@
-const admin = require('firebase-admin');
-const serviceAccount = require('../serviceAccountKey.json');
+const admin = require("firebase-admin");
+const serviceAccount = require("../serviceAccountKey.json");
+let db;
+
 //initialize admin SDK using serciceAcountKey
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
-
-getDialogue().then(result =>{
-    console.log(result);
-    const obj = result;
-    const quoteData = {
-        quote: obj.quote,
-        author: obj.author
-    };
-    return db.collection('sampleData').doc('inspiration')
-        .set(quoteData).then(() =>
-            console.log('new Dialogue written to database'));
-});
-
-const addLocationDate = () => {
-    
+function initializeApp() {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+  db = admin.firestore;
 }
+
+const addLocationData = (data, timestamp) => {
+  const currentDate = moment(new Date(timestamp))
+    .format("YYYY-MM-DD")
+    .toString();
+  return db.collection(currentDate).add(data);
+};
+
+module.exports = { db, initializeApp, addLocationData };
