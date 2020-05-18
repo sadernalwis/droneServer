@@ -5,13 +5,18 @@
     let socket = io();
     let el;
 
-    socket.on('time', (timeString) => {
-      el = document.getElementById('server-time');
-      el.innerHTML = 'Server time: ' + timeString;
+
+    socket.on('CLIENT', (data) => {
+      el = document.getElementById('socket-data');
+      let node = document.createElement("LI");                 // Create a <li> node
+      let textnode = document.createTextNode(JSON.stringify(data));         // Create a text node
+      node.appendChild(textnode);                              // Append the text to <li>
+      // Append <li> to <ul> with id="myList"
+      el.append(node)
     });
   </script>
 </head>
 <body>
-<p id="server-time"></p>
+<p id="socket-data"></p>
 </body>
 </html>

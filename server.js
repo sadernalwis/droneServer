@@ -25,8 +25,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => console.log("Client disconnected"));
 
   socket.on("GPS_DATA", (data) => {
+    io.emit('CLIENT', data.toTimeString());
     console.log("GPS DATA", data);
   });
 });
-
-setInterval(() => io.emit("time", new Date().toTimeString()), 1000);
