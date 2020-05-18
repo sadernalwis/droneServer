@@ -1,0 +1,23 @@
+<html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io();
+    let el;
+
+
+    socket.on('CLIENT', (data) => {
+      el = document.getElementById('socket-data');
+      let node = document.createElement("LI");                 // Create a <li> node
+      let textnode = document.createTextNode(JSON.stringify(data));         // Create a text node
+      node.appendChild(textnode);                              // Append the text to <li>
+      // Append <li> to <ul> with id="myList"
+      el.append(node)
+    });
+  </script>
+</head>
+<body>
+<h1>Drone socket server</h1>
+<p id="socket-data"></p>
+</body>
+</html>
