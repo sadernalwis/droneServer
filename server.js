@@ -28,7 +28,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("GPS_DATA", (data) => {
-    io.emit("CLIENT", { ...data, id: socket.id });
+    const gps_location = JSON.parse(data);
+    io.emit("CLIENT", { ...gps_location, id: socket.id });
     console.log("GPS DATA", data);
   });
 });
