@@ -22,10 +22,13 @@ initializeApp();
 io.on("connection", (socket) => {
   console.log("Client connected", PORT);
   // connectionAttemptRecord(socket.id);
-  socket.on("disconnect", () => console.log("Client disconnected"));
+  socket.on("disconnect", () => {
+    io.emit("DISCONNECT", { id: socket.id });
+    console.log("Drone disconnected");
+  });
 
   socket.on("GPS_DATA", (data) => {
-    io.emit("CLIENT", data);
+    io.emit("CLIENT", { ...data, id: socket.id });
     console.log("GPS DATA", data);
   });
 });
